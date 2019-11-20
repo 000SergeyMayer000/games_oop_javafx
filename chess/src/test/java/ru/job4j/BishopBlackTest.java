@@ -25,20 +25,42 @@ public class BishopBlackTest {
     }
 
     @Test
-    public void thenWay() {
+    public void thenWayC1G5() {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
         Cell[] expect = bishopBlack.way(Cell.C1, Cell.G5);
         Cell[] actual = new Cell[]{Cell.D2, Cell.E3, Cell.F4, Cell.G5};
         assertThat(expect, is(actual));
     }
 
-    public static void main(String[] args) {
-        int size = 8;
-        Cell[] steps = new Cell[size];
-        Cell source = Cell();
-        int deltaY = 1;
-       // steps[0] =new  Cell(0, 1 );
-        Cell
+    @Test
+    public void thenWayG5C1() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.G5);
+        Cell[] expect = bishopBlack.way(Cell.G5, Cell.C1);
+        Cell[] actual = new Cell[]{Cell.F4, Cell.E3, Cell.D2, Cell.C1};
+        assertThat(expect, is(actual));
+    }
 
+    @Test
+    public void thenWayA1h8() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.A1);
+        Cell[] expect = bishopBlack.way(Cell.A1, Cell.H8);
+        Cell[] actual = new Cell[]{Cell.B2, Cell.C3, Cell.D4, Cell.E5, Cell.F6, Cell.G7, Cell.H8};
+        assertThat(expect, is(actual));
+    }
+
+
+    @Test
+    public void thenDiagonalWay() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        boolean expect = bishopBlack.isDiagonal(Cell.C1, Cell.G5);
+        assertThat(expect, is(true));
+    }
+
+    @Test
+    public void thenNotDiagonalWay() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        boolean expect = bishopBlack.isDiagonal(Cell.C1, Cell.E2);
+        assertThat(expect, is(false));
     }
 }
+
