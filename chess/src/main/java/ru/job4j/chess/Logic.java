@@ -24,16 +24,18 @@ public class Logic {
     public boolean move(Cell source, Cell dest) {
         boolean rst = false;
         int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                for (int i = 0; i < steps.length; i++) {
-                    if (findBy(steps[i]) <=figures.length) {
-                        this.figures[index] = this.figures[index].copy(dest);
-                        rst = true;
-                    }
-                }
+        System.out.println(index);
+        Cell[] steps = this.figures[index].way(source, dest);
+        boolean free = true;
+        for (Cell step : steps) {
+            if (findBy(step) != -1) {
+                free = false;
+                break;
             }
+        }
+        if (free) {
+            figures[index] = figures[index].copy(dest);
+            rst = true;
         }
         return rst;
     }
@@ -44,6 +46,7 @@ public class Logic {
         }
         this.index = 0;
     }
+
 
     private int findBy(Cell cell) {
         int rst = -1;
