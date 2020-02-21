@@ -39,12 +39,12 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell ... cells) {
+    public boolean isFree(Cell... cells) {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -68,27 +68,64 @@ public class Logic {
         return rst;
     }
 
-    public boolean isWin() {
-        int[][] table = this.convert();
-        boolean result = false;
+    public static boolean monoHorizontal(int[][] board, int row) {
+        boolean result = true;
+        for (int i = 0; i < board.length; i++) {
+            if (board[row][i] != 1) {
+                result = false;
+                break;
+            }
+        }
         return result;
     }
 
-    public int[][] convert() {
-        int[][] table = new int[this.size][this.size];
-        for (int row = 0; row != table.length; row++) {
-            for (int cell = 0; cell != table.length; cell++) {
-                int position = this.findBy(new Cell(row, cell));
-                if (position != -1 && this.figures[position].movable()) {
-                    table[row][cell] = 1;
-                }
+    public static boolean monoVertical(int[][] board, int column) {
+        boolean result = true;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][column] != 1) {
+                result = false;
+                break;
             }
         }
-        return table;
+        return result;
     }
 
-    @Override
-    public String toString() {
-        return Arrays.toString(this.convert());
+    public static int[] extractDiagonal(int[][] board) {
+        int[] rsl = new int[board.length];
+        for (int i = 0; i < board.length; i++) {
+            rsl[i] = board[i][i];
+        }
+        return rsl;
     }
-}
+
+    public  boolean isWin() {
+        int[][] table = this.convert();
+        boolean result = false;
+        int[] diagonalArray = extractDiagonal(table);
+        for (int i = 0; i < diagonalArray.length; i++) {
+            if (diagonalArray[i] == 1 && (monoHorizontal(table, i) || monoVertical(table, i))) {
+                result = true;
+                break;
+            }
+        }
+            return result;
+        }
+
+        public int[][] convert () {
+            int[][] table = new int[this.size][this.size];
+            for (int row = 0; row != table.length; row++) {
+                for (int cell = 0; cell != table.length; cell++) {
+                    int position = this.findBy(new Cell(row, cell));
+                    if (position != -1 && this.figures[position].movable()) {
+                        table[row][cell] = 1;
+                    }
+                }
+            }
+            return table;
+        }
+
+        @Override
+        public String toString () {
+            return Arrays.toString(this.convert());
+        }
+    }
