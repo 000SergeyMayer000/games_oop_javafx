@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.chess;
 
 import com.sun.prism.impl.shape.BasicEllipseRep;
 import org.junit.Ignore;
@@ -63,4 +63,3 @@ public class BishopBlackTest {
         assertThat(expect, is(false));
     }
 }
-

@@ -19,13 +19,13 @@ public enum Cell {
     }
 
     public static Cell findBy(int x, int y) {
-        Cell findCell = null;
-        for (Cell cell : Cell.values()) {
-            if ((cell.x == x) && (cell.y == y)) {
-                findCell = cell;
+        Cell rsl = null;
+        for (Cell cell : values()) {
+            if (cell.x == x && cell.y == y) {
+                rsl = cell;
                 break;
             }
         }
-        return findCell;
+        return rsl;
     }
 }
