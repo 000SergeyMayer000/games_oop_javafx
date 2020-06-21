@@ -20,8 +20,8 @@ public class BishopBlackTest {
     @Test
     public void whenCopy() {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Figure bishopBlackCopy = bishopBlack.copy(Cell.C1);
-        assertThat(bishopBlackCopy.position(), is(Cell.C1));
+        Figure bishopBlackCopy = bishopBlack.copy(Cell.C3);
+        assertThat(bishopBlackCopy.position(), is(Cell.C3));
     }
 
     @Test
